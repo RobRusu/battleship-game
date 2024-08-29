@@ -8,6 +8,8 @@ let carrier = new Ship(5);
 let submarine = new Ship(3);
 let destroyer = new Ship(3);
 
+let ships = [battleship, carrier, submarine, destroyer];
+
 test("check if coordinates exist in the board", () => {
   expect(board[9][9]).toEqual(0);
 });
@@ -58,4 +60,17 @@ test("Ship cannot overlap with other ships", () => {
 
 test("Check for ship coordinates on the object", () => {
   expect(carrier.coordinates).toContainEqual([3, 3]);
+});
+
+test("Ship receives an attack and registers the hit", () => {
+  gameboard.receiveAttack(board, 4, 6, ships);
+  expect(board[4][6]).toBe("X");
+  expect(board[4][7]).toBe(1);
+  expect(battleship.hits).toBe(1);
+});
+
+test("Empty place receives an attack and registers the missed hit", () => {
+  gameboard.receiveAttack(board, 9, 8, ships);
+  expect(board[9][8]).toBe("O");
+  expect(gameboard.missedHits).toContainEqual([9, 8]);
 });

@@ -3,6 +3,7 @@ import { Ship } from "./ship";
 export class Gameboard {
   constructor(size = 10) {
     this.size = size;
+    this.missedHits = [];
   }
 
   createBoard() {
@@ -57,6 +58,36 @@ export class Gameboard {
       // console.log(
       //   `Invalid placement for ${ship.length}-length ship at (${startRow}, ${startCol}) ${orientation}`
       // );
+      return false;
+    }
+  }
+
+  receiveAttack(board, row, col, ships) {
+    if (board[row][col] == 1) {
+      board[row][col] = "X";
+      ships.forEach((ship) => {
+        if (this.checkShipCoordinates(ship, row, col)) {
+          ship.hit();
+        }
+      });
+    } else if (board[row][col] == 0) {
+      board[row][col] = "O";
+      this.missedHits.push([row, col]);
+    }
+  }
+
+  checkShipCoordinates(obj, row, col) {
+    let target = [row, col];
+
+    let exists = obj.coordinates.some(
+      (coordinate) =>
+        coordinate.length === target.length &&
+        coordinate.every((value, index) => value === target[index])
+    );
+
+    if (exists) {
+      return true;
+    } else {
       return false;
     }
   }
