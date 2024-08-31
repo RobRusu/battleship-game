@@ -70,6 +70,8 @@ export class Gameboard {
           ship.hit();
         }
       });
+      if (this.allShipsSunk(ships)) return true;
+      return false;
     } else if (board[row][col] == 0) {
       board[row][col] = "O";
       this.missedHits.push([row, col]);
@@ -90,5 +92,15 @@ export class Gameboard {
     } else {
       return false;
     }
+  }
+
+  allShipsSunk(ships) {
+    let shipsSunkCount = 0;
+    ships.forEach((ship) => {
+      if (ship.sunk === true) shipsSunkCount++;
+    });
+
+    if (shipsSunkCount === 5) return true;
+    return false;
   }
 }
