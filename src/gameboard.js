@@ -1,5 +1,3 @@
-import { Ship } from "./ship";
-
 export class Gameboard {
   constructor(size = 10) {
     this.size = size;
