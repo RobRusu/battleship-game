@@ -1,6 +1,6 @@
 import { Gameboard } from "./gameboard";
 
-class Player {
+export class Player {
   constructor(type) {
     this.playerType = type;
     this.board = new Gameboard();

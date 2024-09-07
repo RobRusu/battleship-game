@@ -1,0 +1,4 @@
+1. display the attacks on the board - DONE
+2. make the computer capable of making random plays at random intervals (1 - 5 seconds) - DONE
+3. announce when the game has ended - DONE
+4. allow players to place their ships
