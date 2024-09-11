@@ -1,5 +1,9 @@
 import "./style.css";
 import { createGameboard } from "./renderGameboard";
 
-createGameboard("player");
-createGameboard("computer");
+const placeShips = document.querySelector(".place");
+
+placeShips.addEventListener("click", () => {
+  createGameboard("player");
+  createGameboard("computer");
+});

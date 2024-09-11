@@ -51,19 +51,19 @@ export class Gameboard {
         }
       }
       ship.setCoordinates(coordinates); // Assign coordinates to the ship
-      // console.log(
-      //   `${ship.length}-length ship placed at ${coordinates} ${orientation}`
-      // );
+      console.log(
+        `${ship.length}-length ship placed at ${coordinates} ${orientation}`
+      );
     } else {
-      // console.log(
-      //   `Invalid placement for ${ship.length}-length ship at (${startRow}, ${startCol}) ${orientation}`
-      // );
+      console.log(
+        `Invalid placement for ${ship.length}-length ship at (${startRow}, ${startCol}) ${orientation}`
+      );
       return false;
     }
   }
 
   receiveAttack(board, row, col, ships, cell = 0) {
-    if (board[row][col] == 1) {
+    if (board[row][col] === 1) {
       board[row][col] = "X";
       ships.forEach((ship) => {
         if (this.checkShipCoordinates(ship, row, col)) {
@@ -73,7 +73,7 @@ export class Gameboard {
       });
       if (this.allShipsSunk(ships)) return true;
       return false;
-    } else if (board[row][col] == 0) {
+    } else if (board[row][col] === 0) {
       board[row][col] = "O";
       this.missedHits.push([row, col]);
       if (cell) cell.classList.add("miss");
