@@ -38,9 +38,12 @@ restart.addEventListener("click", () => {
   let patrolBoatRow = document.getElementById("patrolBoatRow");
   let patrolBoatCol = document.getElementById("patrolBoatCol");
 
+  let message = document.querySelector(".message");
+
   placeShipsDiv.style.display = "flex";
   playerBoard.textContent = "";
   computerBoard.textContent = "";
+  message.textContent = "Place your ships";
   carrierRow.value = 0;
   carrierCol.value = 0;
 
