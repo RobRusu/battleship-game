@@ -2,6 +2,11 @@ import { switchTurns } from "./renderGameboard";
 
 export function computerMoves(ships) {
   const delay = Math.floor(Math.random() * 1500);
+  let playerBoard = document.querySelector(".player");
+  let computerBoard = document.querySelector(".computer");
+  let playerChildren = document.querySelector(".player").children;
+  let displayMessage = document.querySelector(".message");
+  let attackedCells = 0;
   let coordinates = [];
 
   ships.forEach((ship) => {
@@ -29,13 +34,39 @@ export function computerMoves(ships) {
       );
 
       if (isHit) {
+        boardCell.classList.remove("playerShip");
         boardCell.classList.add("hit");
       } else {
         boardCell.classList.add("miss");
       }
-      switchTurns();
+
+      for (let i = 0; i < playerChildren.length; i++) {
+        let child = playerChildren[i];
+        if (child.classList.contains("hit")) attackedCells++;
+      }
+
+      console.log(attackedCells);
+
+      if (attackedCells === 17) {
+        displayMessage.textContent = `Game over, computer won!`;
+        playerBoard.style.pointerEvents = "none";
+        computerBoard.style.pointerEvents = "none";
+      } else {
+        attackedCells = 0;
+        switchTurns();
+      }
     } else {
       computerMoves(ships);
     }
   }, delay);
+}
+
+function allShipsSunk(ships) {
+  let shipsSunkCount = 0;
+  ships.forEach((ship) => {
+    if (ship.sunk === true) shipsSunkCount++;
+  });
+
+  if (shipsSunkCount === 5) return true;
+  return false;
 }

@@ -7,12 +7,15 @@ import { computerPlacement } from "./shipsComputerPlacement";
 let playerShips = createPlayerShips();
 let computerShips = createPlayerShips();
 let currentPlayer = 1;
+let displayMessage = document.querySelector(".message");
 
 export function createGameboard(player) {
   if (player === "player") {
     let playerObj = new Player(player);
     let playerGameboard = playerObj.board;
     let playerBoard = playerGameboard.createBoard();
+    let DOMBoard = document.querySelector(`.${player}`);
+    DOMBoard.style.pointerEvents = "none";
     playerPlacement(playerGameboard, playerBoard, playerShips);
     displayBoard(playerBoard, playerGameboard, player);
   } else if (player === "computer") {
@@ -31,9 +34,11 @@ export function switchTurns() {
   console.log(`Is player's ${currentPlayer} turn`);
 
   if (currentPlayer === 1) {
+    displayMessage.textContent = "Your turn";
     playerBoard.style.pointerEvents = "none";
     computerBoard.style.pointerEvents = "auto";
   } else {
+    displayMessage.textContent = "Computer's turn";
     playerBoard.style.pointerEvents = "none";
     computerBoard.style.pointerEvents = "none";
     computerMoves(playerShips);
@@ -54,12 +59,13 @@ function displayBoard(board, gameboard, player) {
       boardCell.classList.add("cell");
       boardCell.dataset.row = i;
       boardCell.dataset.col = j;
-      if (cell === 1 && player === "player") boardCell.textContent = cell;
+      if (cell === 1 && player === "player")
+        boardCell.classList.add("playerShip");
 
       boardCell.addEventListener("click", () => {
         gameboard.receiveAttack(board, i, j, ships, boardCell);
         if (gameboard.allShipsSunk(ships) === true) {
-          console.log("Game over");
+          displayMessage.textContent = `Game over, you won!`;
           DOMBoard.style.pointerEvents = "none";
         } else {
           switchTurns();

@@ -1,5 +1,3 @@
-import { switchTurns } from "./renderGameboard";
-
 export class Gameboard {
   constructor(size = 10) {
     this.size = size;
@@ -69,6 +67,7 @@ export class Gameboard {
         if (this.checkShipCoordinates(ship, row, col)) {
           ship.hit();
           if (cell) cell.classList.add("hit");
+          cell.style.pointerEvents = "none";
         }
       });
       if (this.allShipsSunk(ships)) return true;
@@ -77,6 +76,7 @@ export class Gameboard {
       board[row][col] = "O";
       this.missedHits.push([row, col]);
       if (cell) cell.classList.add("miss");
+      cell.style.pointerEvents = "none";
     }
   }
 

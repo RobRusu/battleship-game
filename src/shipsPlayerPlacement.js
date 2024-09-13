@@ -32,39 +32,75 @@ export function playerPlacement(gameboard, board, ships) {
     "orientationPatrolBoat"
   ).value;
 
-  gameboard.placeShip(
-    board,
-    ships[0],
-    carrierRow,
-    carrierCol,
-    orientationCarrier
-  );
-  gameboard.placeShip(
-    board,
-    ships[1],
-    battleshipRow,
-    battleshipCol,
-    orientationBattleship
-  );
-  gameboard.placeShip(
-    board,
-    ships[2],
-    destroyerRow,
-    destroyerCol,
-    orientationDestroyer
-  );
-  gameboard.placeShip(
-    board,
-    ships[3],
-    submarineRow,
-    submarineCol,
-    orientationSubmarine
-  );
-  gameboard.placeShip(
-    board,
-    ships[4],
-    patrolBoatRow,
-    patrolBoatCol,
-    orientationPatrolBoat
-  );
+  if (
+    carrierRow >= 0 &&
+    carrierRow <= 9 &&
+    carrierCol >= 0 &&
+    carrierCol <= 9
+  ) {
+    gameboard.placeShip(
+      board,
+      ships[0],
+      carrierRow,
+      carrierCol,
+      orientationCarrier
+    );
+  }
+
+  if (
+    battleshipRow >= 0 &&
+    battleshipRow <= 9 &&
+    battleshipCol >= 0 &&
+    battleshipCol <= 9
+  ) {
+    gameboard.placeShip(
+      board,
+      ships[1],
+      battleshipRow,
+      battleshipCol,
+      orientationBattleship
+    );
+  }
+  if (
+    destroyerRow >= 0 &&
+    destroyerRow <= 9 &&
+    destroyerCol >= 0 &&
+    destroyerCol <= 9
+  ) {
+    gameboard.placeShip(
+      board,
+      ships[2],
+      destroyerRow,
+      destroyerCol,
+      orientationDestroyer
+    );
+  }
+  if (
+    submarineRow >= 0 &&
+    submarineRow <= 9 &&
+    submarineCol >= 0 &&
+    submarineCol <= 9
+  ) {
+    gameboard.placeShip(
+      board,
+      ships[3],
+      submarineRow,
+      submarineCol,
+      orientationSubmarine
+    );
+  }
+  if (
+    patrolBoatRow >= 0 &&
+    patrolBoatRow <= 9 &&
+    patrolBoatCol >= 0 &&
+    patrolBoatCol <= 9
+  ) {
+    gameboard.placeShip(
+      board,
+      ships[4],
+      patrolBoatRow,
+      patrolBoatCol,
+      orientationPatrolBoat
+    );
+  }
 }
